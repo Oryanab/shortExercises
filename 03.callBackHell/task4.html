@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            4) Create a script with three console.log commands
+            * Consol.log(“first call”)
+            * Place a console.log(“second call”) inside a setTimeout() function to be called after 2 sec  
+            * Consol.log(“ third call”`)
+            * What will your console output be?
+        */
+      console.log("first call");
+      setTimeout(function () {
+        console.log("second call");
+      }, 2000);
+      console.log("third call");
+
+      // esimate before lunching:
+      // output: first call, third call, second call
+      // reason: when i lunch the program it lunches all the logs, due to the fact that the second call comes after 2 seconds it will appear last, but thats doesnt means the timeout function wasnt lunched before the third call.
+      // real output:
+      // Exactly as expected :first call, third call, second call
+    </script>
+  </body>
+</html>

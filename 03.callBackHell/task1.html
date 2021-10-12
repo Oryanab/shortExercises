@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+          Create three functions that evaluate if a triangle is a right-angle triangle or not.
+          the First function receives 3 parameters and checks if the square of the first two parameters is equal to the square of the third.  The first function calls the second function to receive the square value for each parameter.
+
+          The Second function receives 1 parameter and calls a third function with the parameter received. (get a number return its squared)
+
+          The third function receives two parameters and returns the value of the multiplication of the two parameters. (receive the value of a and b)
+
+          a*a+b*b = c*c
+      */
+      function thirdFunction(x, y) {
+        return x * y;
+      }
+      function secondFunction(num) {
+        return thirdFunction(num, num);
+      }
+      function firstFunction(leg_a, leg_b, hypo) {
+        if (
+          secondFunction(leg_a) + secondFunction(leg_b) ===
+          secondFunction(hypo)
+        ) {
+          console.log("this is a right-angle triangle");
+        } else {
+          console.log("this is not a right-angle triangle");
+        }
+      }
+      firstFunction(8, 15, 17);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            5) Create a function that receives four parameters (time, color, callback, reject);
+            Create a random number between 1-10
+            By using setTimeOut and callbacks, the function will change the backgroundColor of the body (max of three times)
+            If the random number is bigger than 5:
+            Change backgroundColor for at least 1 sec
+            Use callback to call the function again for three times.
+            If the number is smaller than 5:
+            console.log(“your request was rejected ☹”)
+            Hint: to check if all three callbacks work, then set the if(  >0) (
+        */
+
+      // time = time in sec
+      // color = color i want
+      // rejet = "your request was rejected ☹"
+
+      function changeBgColorNow(color) {
+        const body = document.body;
+        body.style.backgroundColor = color;
+      }
+
+      function changeBgColor(time, color, callback, reject) {
+        const rnum = Math.floor(Math.random() * 10 + 1);
+        console.log(rnum);
+        if (rnum > 5) {
+          setTimeout(() => {
+            changeBgColorNow(color);
+            callback();
+          }, time);
+        } else {
+          console.log(reject);
+        }
+      }
+
+      changeBgColor(
+        1000,
+        "red",
+        () => {
+          changeBgColor(
+            1000,
+            "yellow",
+            () => {
+              changeBgColor(
+                1000,
+                "blue",
+                () => {
+                  changeBgColor(
+                    1000,
+                    "green",
+                    () => {
+                      changeBgColor(
+                        1000,
+                        "pink",
+                        () => {
+                          changeBgColor(
+                            1000,
+                            "orange",
+                            () => {
+                              changeBgColor(
+                                1000,
+                                "black",
+                                () => {},
+                                "your request was rejected ☹ - Again"
+                              );
+                            },
+                            "your request was rejected ☹"
+                          );
+                        },
+                        "your request was rejected ☹"
+                      );
+                    },
+                    "your request was rejected ☹"
+                  );
+                },
+                "your request was rejected ☹"
+              );
+            },
+            "your request was rejected ☹"
+          );
+        },
+        "your request was rejected ☹"
+      );
+    </script>
+  </body>
+</html>
