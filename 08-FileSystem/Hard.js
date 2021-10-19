@@ -1,11 +1,11 @@
 const fs = require("fs");
-const { listenerCount } = require("process");
 
 const testFolder = "./maze";
 
 let pathfile = [];
 let pathdir = [];
-function copystuff(dir) {
+
+function findTreasureSync(dir) {
   fs.readdir(dir, (err, files) => {
     files.forEach((file) => {
       if (file.includes("room")) {
@@ -23,6 +23,7 @@ function copystuff(dir) {
             pathfile.push(room + "/" + file);
           }
         });
+
         for (let room2 of pathdir) {
           fs.readdir(room2, (err, files) => {
             files.forEach((file) => {
@@ -32,24 +33,14 @@ function copystuff(dir) {
                 pathfile.push(room2 + "/" + file);
               }
             });
-            for (let room3 of pathdir) {
-              fs.readdir(room3, (err, files) => {
-                files.forEach((file) => {
-                  if (file.includes("room")) {
-                    pathdir.push(room3 + "/" + file);
-                  } else {
-                    pathfile.push(room3 + "/" + file);
-                  }
-                });
-                for (let file of pathfile) {
-                  fs.readFile(file, function read(err, data) {
-                    try {
-                      const jsonFile = JSON.parse(data);
-                      if (jsonFile.hasOwnProperty("treasure")) {
-                        console.log(file);
-                      }
-                    } catch (e) {}
-                  });
+
+            for (let file of pathfile) {
+              fs.readFile(file, (err, data) => {
+                if (
+                  isJson(data) &&
+                  JSON.parse(data).hasOwnProperty("treasure")
+                ) {
+                  console.log(file);
                 }
               });
             }
@@ -59,8 +50,14 @@ function copystuff(dir) {
     }
   });
 }
-copystuff(testFolder);
 
-// returnFilesInsideDir(testFolder + "room-0");
-// returnFilesInsideDir(testFolder + "room-1");
-// returnFilesInsideDir(testFolder + "room-2");
+findTreasureSync(testFolder);
+
+function isJson(str) {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
